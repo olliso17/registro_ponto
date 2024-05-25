@@ -1,0 +1,39 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id                String             @id @default(uuid())
+  name              String
+  email             String             @unique
+  password          String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  active            Boolean            @default(true)
+  workedHours       EmployeeWorkedHours[]
+}
+
+model WorkedHours {
+  id                String             @id @default(uuid())
+  hoursWorked       String             @default("00:00:00")
+  employees         EmployeeWorkedHours[]
+}
+
+model EmployeeWorkedHours {
+  id                String             @id @default(uuid())
+  employeeId        String
+  workedHoursId     String
+  createdAt         DateTime           @default(now())
+
+  employee          Employee           @relation(fields: [employeeId], references: [id])
+  workedHours       WorkedHours        @relation(fields: [workedHoursId], references: [id])
+
+  @@index([employeeId])
+  @@index([workedHoursId])
+}
