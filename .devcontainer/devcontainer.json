@@ -1,0 +1,34 @@
+{
+    "name": "regristro_pontos",
+    // "dockerComposeFile": ["../docker-compose.yml, docker-compose.yml"],
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:dev-21-bookworm",
+    // "service": "src",
+    // "workspaceFolder": "/src",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "ms-vscode.vscode-typescript-next",
+          "rangav.vscode-thunder-client",
+          "Orta.vscode-jest",
+          "esbenp.prettier-vscode",
+          "dbaeumer.vscode-eslint",
+          "kavod-io.vscode-jest-test-adapter",
+          "ms-vscode.js-debug-companion",
+          "TabNine.tabnine-vscode",
+          "christian-kohler.npm-intellisense",
+          "formulahendry.code-runner", 
+          "Dheovani.svg-viewer",
+          "eamodio.gitlens",
+          "alefragnani.project-manager",
+          "aaron-bond.better-comments",
+          "NuclleaR.vscode-extension-auto-import",
+          "vscode-icons-team.vscode-icons",
+          "steoates.autoimport"
+        ],
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.wordWrap": "on",
+        "editor.wordWrapColumn": 60
+      }
+    },
+    "postCreateCommand": "npm install"
+  }

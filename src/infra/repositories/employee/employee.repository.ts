@@ -1,8 +1,8 @@
 
 import {PrismaClient } from '@prisma/client';
 import EmployeeRepositoryInterface from './employee.repository.interface';
-import { AppError } from '../../error/app.error';
-import { Employee } from '../../domain/entities/employee/employee';
+import { AppError } from '../../../error/app.error';
+import { Employee } from '../../../domain/entities/employee/employee';
 
 
 const prisma = new PrismaClient();
@@ -74,7 +74,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
 
             const updatedEmployee = new Employee({
                 name: updatedEmployeeData.name,
-                updated_at: updatedEmployeeData.updatedAt,
+                updated_at: updatedEmployeeData.updated_at,
                 active: updatedEmployeeData.active
             });
 

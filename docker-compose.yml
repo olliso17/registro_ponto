@@ -3,7 +3,7 @@ services:
   src:
     build:
       context: ./src
-      dockerfile: DockerFile
+      dockerfile: Dockerfile
     command: npm i
     ports:
       - 8080:8000

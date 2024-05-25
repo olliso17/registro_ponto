@@ -1,9 +1,17 @@
-import { AppError } from "./error/app.error";
+import express, { Express, Request, Response } from "express";
+import dotenv from "dotenv";
+import router from "./infra/routers/router";
 
-const regex = /\d{2}:\d{2}:\d{2}/
-const hours_worked= "a0:00:00"
+dotenv.config();
 
-if(regex.test(hours_worked)===false){
-   console.log(regex.test(hours_worked))
-}
-console.log(regex.test(hours_worked))
+const app: Express = express();
+const port = process.env.PORT || 3000;
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("olá mundo");
+});
+app.use('/api', router);
+
+app.listen(port, () => {
+  console.log(`[server]: Server is running at http://localhost:${port}`);
+});

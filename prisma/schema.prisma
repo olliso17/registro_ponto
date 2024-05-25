@@ -11,27 +11,26 @@ datasource db {
 model Employee {
   id                String             @id @default(uuid())
   name              String            
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
+  created_at         DateTime           @default(now())
+  updated_at        DateTime           @updatedAt
   active            Boolean            @default(true)
   workedHours       EmployeeWorkedHours[]
 }
 
 model WorkedHours {
   id                String             @id @default(uuid())
-  hoursWorked       String             @default("00:00:00")
+  hours_worked      String             @default("00:00:00")
   employees         EmployeeWorkedHours[]
 }
 
 model EmployeeWorkedHours {
   id                String             @id @default(uuid())
-  employeeId        String
-  workedHoursId     String
-  createdAt         DateTime           @default(now())
+  employee_id        String
+  worked_hours_id    String
+  created_at         DateTime           @default(now())
+  employee          Employee           @relation(fields: [employee_id], references: [id])
+  workedHours       WorkedHours        @relation(fields: [worked_hours_id], references: [id])
 
-  employee          Employee           @relation(fields: [employeeId], references: [id])
-  workedHours       WorkedHours        @relation(fields: [workedHoursId], references: [id])
-
-  @@index([employeeId])
-  @@index([workedHoursId])
+  @@index([employee_id])
+  @@index([worked_hours_id])
 }
