@@ -6,6 +6,8 @@ import { stringNotNullAndBlankSpace } from "../../../util/regex";
 
 type EmployeeProps = {
     name: string,  
+    active?:boolean
+    updated_at?:Date
 }
 
 export class Employee implements EmployeeInterface{
@@ -19,7 +21,7 @@ export class Employee implements EmployeeInterface{
         this._id = uuid.toString();
         this._name = props.name;
         this._created_at = new Date;
-        this._updated_at = new Date;
+        this._updated_at =  new Date;
         this._active = true;
         this.validateEmployee()
     }
