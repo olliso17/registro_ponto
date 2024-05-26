@@ -9,7 +9,7 @@ type EmployeeProps = {
     name: string,  
     active?:boolean
     updated_at?:Date
-    
+    hash?:string
 }
 
 export class Employee implements EmployeeInterface{
@@ -50,7 +50,9 @@ export class Employee implements EmployeeInterface{
     }
     generateHash(name:string) {
         const hash = CRC32.str(name);
-        return (hash >>> 0).toString(16).padStart(8, '0');
+        this._hash = (hash >>> 0).toString(16).padStart(8, '0');
+        
+        return this._hash
     }
     validateEmployee(){
         if (stringNotNullAndBlankSpace.test(this._name) === false) {
