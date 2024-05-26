@@ -52,8 +52,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
 
             if (!employeeData) return null;
 
-            const employee = new Employee({
-                name:employeeData.name});
+            const employee = new Employee(employeeData);
 
             return employee;
         } catch (error) {
@@ -82,8 +81,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
 
             if (!employeeData) return null;
 
-            const employee = new Employee({
-                name:employeeData.name});
+            const employee = new Employee(employeeData);
 
             return employee;
         } catch (error) {
