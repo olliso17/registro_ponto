@@ -5,5 +5,7 @@ export default interface EmployeeInterface{
     get created_at(): Date;
     get updated_at(): Date;
     get active(): boolean;
+    get hash():string;
+    generateHash(name:string):void;
     validateEmployee():void;
 }

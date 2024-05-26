@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["relationJoins"]
 }
 
@@ -9,30 +9,31 @@ datasource db {
 }
 
 model Employee {
-  id          String                @id @default(uuid())
+  id          String        @id @default(uuid())
   name        String
-  created_at  DateTime              @default(now())
-  updated_at  DateTime              @updatedAt
-  active      Boolean               @default(true)
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
+  active      Boolean       @default(true)
+  hash        String        @default("")
   workedHours WorkedHours[]
 }
 
-
 model Type {
-  id                  String                @id @default(uuid())
-  name                String                @unique
+  id          String        @id @default(uuid())
+  name        String        @unique
   workedHours WorkedHours[]
 }
 
 model WorkedHours {
-  id                  String                @id @default(uuid())
-  employee_id     String
-  type_id         String
-  created_at      DateTime    @default(now())
-  date            String      @default("")
-  employee        Employee    @relation(fields: [employee_id], references: [id])
-  type            Type        @relation(fields: [type_id], references: [id])
-  hours_worked String                @default("00:00:00")
+  id           String   @id @default(uuid())
+  employee_id  String
+  type_id      String
+  created_at   DateTime @default(now())
+  date         String   @default("")
+  employee     Employee @relation(fields: [employee_id], references: [id])
+  type         Type     @relation(fields: [type_id], references: [id])
+  hours_worked String   @default("00:00:00")
+
   @@index([employee_id])
   @@index([id])
   @@index([type_id])
