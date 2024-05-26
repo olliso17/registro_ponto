@@ -3,8 +3,7 @@ import { AppError } from "../../../error/app.error";
 import { isHours, stringNotNullAndBlankSpace } from "../../../util/regex";
 import WorkedHoursInterface from "./workedHours.interface";
 import { Employee } from "../employee/employee";
-import { E } from "vitest/dist/reporters-yx5ZTtEV";
-
+import { v4 as uuidv4 } from 'uuid';
 
 type WorkedHoursProps = {
     employee_id: string,
@@ -16,6 +15,7 @@ type WorkedHoursProps = {
 }
 
 export class WorkedHours implements WorkedHoursInterface {
+    private _id:string;
     private _hours_worked: string;
     private _employee_id: string;
     private _created_at: Date;
@@ -25,6 +25,7 @@ export class WorkedHours implements WorkedHoursInterface {
     private _employee: Employee;
 
     constructor(props: WorkedHoursProps) {
+        this._id = uuidv4();
         this._employee_id = props.employee_id;
         this._created_at = new Date();
         this._type_id = props.type_id;
@@ -33,6 +34,9 @@ export class WorkedHours implements WorkedHoursInterface {
         this._type= props.type || null
         this._employee = props.employee || null
         this.validateWorkedHours();
+    }
+    get id(): string {
+        return this._id;
     }
     get type(): { id: string; name: string; } {
         return this._type

@@ -4,7 +4,6 @@ import EmployeeRepositoryInterface from './employee.repository.interface';
 import { AppError } from '../../../error/app.error';
 import { Employee } from '../../../domain/entities/employee/employee';
 import * as CRC32 from 'crc-32';
-import e from 'express';
 
 const prisma = new PrismaClient();
 

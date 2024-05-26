@@ -1,5 +1,5 @@
 import EmployeeInterface from "./employee.interface";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { AppError } from "../../../error/app.error";
 import { stringNotNullAndBlankSpace } from "../../../util/regex";
 import * as CRC32 from 'crc-32';
@@ -21,7 +21,7 @@ export class Employee implements EmployeeInterface{
     private _hash:string;
 
     constructor(props: EmployeeProps) {
-        this._id = uuid.toString();
+        this._id = uuidv4();
         this._name = props.name;
         this._created_at = new Date;
         this._updated_at =  new Date;
