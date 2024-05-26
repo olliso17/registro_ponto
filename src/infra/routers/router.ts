@@ -8,6 +8,8 @@ const workedHoursController = new WorkedHoursController();
 
 router.post('/employee/create', (req, res) => employeeController.createEmployee(req, res));
 router.post('/workedHours/create', (req, res) => workedHoursController.createWorkedHours(req, res));
+router.get('/workedHours/:employee_id', (req, res) => workedHoursController.getWorkedHoursByEmployeeId(req, res));
+router.get('/workedHours/created/:employee_id', (req, res) => workedHoursController.getWorkedHoursByCreated(req, res));
 // router.get('/employees/:id', (req, res) => employeeController.getEmployeeById(req, res));
 // router.get('/employees', (req, res) => employeeController.getAllEmployees(req, res));
 // router.put('/employees/:id', (req, res) => employeeController.updateEmployee(req, res));

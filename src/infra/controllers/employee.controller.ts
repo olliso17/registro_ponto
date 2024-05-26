@@ -1,8 +1,8 @@
 
 import { Request, Response } from 'express';
 import EmployeeRepositoryInterface from '../repositories/employee/employee.repository.interface';
-import { CreateEmployeeUsecase } from '../../application/employee/createEmployee.usecase';
 import EmployeeRepository from '../repositories/employee/employee.repository';
+import { CreateEmployeeUsecase } from '../../application/usecases/employee/createEmployee.usecase';
 
 class EmployeeController {
     private createEmployeeUsecase: CreateEmployeeUsecase;

@@ -1,6 +1,7 @@
-import EmployeeRepositoryInterface from "../../infra/repositories/employee/employee.repository.interface";
-import { AppError } from "../../error/app.error";
-import { Employee } from "../../domain/entities/employee/employee";
+import { Employee } from "../../../domain/entities/employee/employee";
+import { AppError } from "../../../error/app.error";
+import EmployeeRepositoryInterface from "../../../infra/repositories/employee/employee.repository.interface";
+
 
 export class CreateEmployeeUsecase{
     constructor(private employeeRepository: EmployeeRepositoryInterface) {}

@@ -3,6 +3,7 @@ import {PrismaClient } from '@prisma/client';
 import EmployeeRepositoryInterface from './employee.repository.interface';
 import { AppError } from '../../../error/app.error';
 import { Employee } from '../../../domain/entities/employee/employee';
+import { WorkedHours } from '@prisma/client';
 
 
 const prisma = new PrismaClient();
@@ -24,6 +25,8 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
             return employee;
         } catch (error) {
             throw new AppError('Failed to create employee', 500);
+        } finally {
+            await prisma.$disconnect();
         }
     }
 
@@ -32,6 +35,14 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
             where: {
                 id,
             },
+            include: {
+                workedHours: {
+                    include:{
+                        type:true
+                    }
+                }
+            },
+            
         });
 
         if (!employeeData) return null;
