@@ -10,15 +10,7 @@ const prisma = new PrismaClient();
 
 class EmployeeRepository implements EmployeeRepositoryInterface {
     async createEmployee(name: string): Promise<Employee> {
-        const existingEmployee = await prisma.employee.findUnique({
-            where: {
-                name
-            }
-        });
-
-        if (existingEmployee) {
-            throw new AppError("Name is not a valid employee", 500);
-        }
+     
         const codigo = CRC32.str(name);
         const hash = (codigo >>> 0).toString(16).padStart(8, '0');
         try {
@@ -40,7 +32,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
 
             return employee;
         } catch (error) {
-            throw new AppError('Failed to create employee', 500);
+            throw new AppError("Name is not a valid employee", 500);
         } finally {
             await prisma.$disconnect();
         }
