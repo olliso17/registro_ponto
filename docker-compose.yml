@@ -13,8 +13,8 @@ services:
   postgres:
     image: "postgres"
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: resgistro
+      POSTGRES_PASSWORD: registro
       PGDATA: /data/postgres
       REDIS_HOST: cache
       REDIS_PORT: 6379

@@ -27,6 +27,7 @@ class WorkedHoursController {
         } catch (error) {
             return res.status(500).json({ error: 'Failed to create WorkedHours' });
 
+
         }
     }
      async getWorkedHoursByEmployeeId(req: Request, res: Response): Promise<Response> {

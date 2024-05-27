@@ -12,6 +12,8 @@ type WorkedHoursProps = {
     date?:string
     type?:Type|any
     employee?: Employee|any
+    id?:string
+    created_at?: Date;
 }
 
 export class WorkedHours implements WorkedHoursInterface {
@@ -25,11 +27,11 @@ export class WorkedHours implements WorkedHoursInterface {
     private _employee: Employee;
 
     constructor(props: WorkedHoursProps) {
-        this._id = uuidv4();
+        this._id = props.id || uuidv4();
         this._employee_id = props.employee_id;
-        this._created_at = new Date();
+        this._created_at = props.created_at || new Date();
         this._type_id = props.type_id;
-        this._date = new Date().toDateString();
+        this._date =props.date || new Date().toDateString();
         this._hours_worked= props.hours_worked || "00:00:00";
         this._type= props.type || null
         this._employee = props.employee || null

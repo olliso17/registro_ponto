@@ -16,6 +16,9 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
                 }
             })
             const workedHours = new WorkedHours({
+                id: workedHoursData.id,
+                date: workedHoursData.date,
+                created_at:workedHoursData.created_at,
                 employee_id: workedHoursData.employee_id,
                 hours_worked: workedHoursData.hours_worked,
                 type_id: workedHoursData.type_id

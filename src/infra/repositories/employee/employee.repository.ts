@@ -21,7 +21,11 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
         
             const employee = new Employee({
                 name: employeeData.name,
-                hash: employeeData.hash
+                hash: employeeData.hash,
+                id: employeeData.id,
+                created_at:employeeData.created_at,
+                active:employeeData.active,
+                updated_at: employeeData.updated_at
             });
             
              

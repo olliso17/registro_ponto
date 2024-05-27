@@ -16,12 +16,14 @@ model Employee {
   active      Boolean       @default(true)
   hash        String        @default("semHash")
   workedHours WorkedHours[]
+  @@index([created_at, id, name, hash])
 }
 
 model Type {
   id          String        @id @default(uuid())
   name        String        @unique
   workedHours WorkedHours[]
+  @@index([id, name])
 }
 
 model WorkedHours {
@@ -34,7 +36,5 @@ model WorkedHours {
   type         Type     @relation(fields: [type_id], references: [id])
   hours_worked String   @default("00:00:00")
 
-  @@index([employee_id])
-  @@index([id])
-  @@index([type_id])
+  @@index([employee_id, id, type_id])
 }

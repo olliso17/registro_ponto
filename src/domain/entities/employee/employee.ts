@@ -9,7 +9,9 @@ type EmployeeProps = {
     name: string,  
     active?:boolean
     updated_at?:Date
-    hash?:string
+    hash?:string,
+    id?: string,
+    created_at?:Date
 }
 
 export class Employee implements EmployeeInterface{
@@ -21,11 +23,11 @@ export class Employee implements EmployeeInterface{
     private _hash:string;
 
     constructor(props: EmployeeProps) {
-        this._id = uuidv4();
+        this._id = props.id || uuidv4();
         this._name = props.name;
-        this._created_at = new Date;
-        this._updated_at =  new Date;
-        this._active = true;
+        this._created_at = props.created_at || new Date;
+        this._updated_at = props.updated_at|| new Date;
+        this._active = props.active|| true;
         this._hash = this.generateHash(this._name)
         this.validateEmployee()
     }
