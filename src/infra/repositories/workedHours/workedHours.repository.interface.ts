@@ -4,4 +4,6 @@ export interface WorkedHoursRepositoryInterface{
     createWorkedHours(  employee_id: string, hours_worked: string, type_id:string): Promise<WorkedHours>;
     getAllWorkedHoursByEmployeeId(employee_id:string):Promise<WorkedHours[]>
     getAllWorkedHoursByCreated(employee_id:string):Promise<WorkedHours[]>
+    getWorkedHoursByEntryType(employee_id:string):Promise<WorkedHours[]>
+    getWorkedHoursByExitType(employee_id:string):Promise<WorkedHours[]>
 }

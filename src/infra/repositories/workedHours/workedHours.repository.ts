@@ -89,9 +89,11 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
             )
             const workedHours: WorkedHours[] = [];
             workedHoursData.map(worked => {
-                const hours = new WorkedHours(worked);
+                if (worked.date === today) {
+                    const hours = new WorkedHours(worked);
+                    workedHours.push(hours)
+                }
 
-                workedHours.push(hours)
             });
 
             return workedHours
@@ -101,6 +103,78 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
             await prisma.$disconnect();
         }
     }
+    async getWorkedHoursByEntryType(employee_id: string): Promise<WorkedHours[]> {
+        try {
+
+            const workedHoursData = await prisma.workedHours.findMany(
+                {
+                    where: {
+                        employee_id: employee_id,
+                    },
+                    include: {
+                        employee: true,
+                        type: {
+                            select: {
+                                name: true
+                            }
+                        }
+                    }
+                }
+            )
+            const workedHours: WorkedHours[] = [];
+            workedHoursData.map(worked => {
+                if(worked.type.name === "entrada"){
+                    const hours = new WorkedHours(worked);
+
+                    workedHours.push(hours)
+                }
+
+            });
+
+            return workedHours
+        } catch (error) {
+            throw new AppError('Failed to get all employee worked hours', 500);
+        } finally {
+            await prisma.$disconnect();
+        }
+    }
+    async getWorkedHoursByExitType(employee_id: string): Promise<WorkedHours[]> {
+        try {
+
+            const workedHoursData = await prisma.workedHours.findMany(
+                {
+                    where: {
+                        employee_id: employee_id,
+                    },
+                    include: {
+                        employee: true,
+                        type: {
+                            select: {
+                                name: true
+                            }
+                        }
+                    }
+                }
+            )
+            const workedHours: WorkedHours[] = [];
+            workedHoursData.map(worked => {
+                if(worked.type.name === "saida"){
+                    const hours = new WorkedHours(worked);
+
+                    workedHours.push(hours)
+                }
+
+            });
+
+            return workedHours
+        } catch (error) {
+            throw new AppError('Failed to get all employee worked hours', 500);
+        } finally {
+            await prisma.$disconnect();
+        }
+    }
+
+
 }
 
 
