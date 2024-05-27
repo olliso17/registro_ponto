@@ -34,7 +34,7 @@ model WorkedHours {
   date         String   @default("")
   employee     Employee @relation(fields: [employee_id], references: [id])
   type         Type     @relation(fields: [type_id], references: [id])
-  hours_worked String   @default("00:00:00")
+  hours_worked String   @default("00h 00m")
 
   @@index([employee_id, id, type_id])
 }

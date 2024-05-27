@@ -32,7 +32,7 @@ export class WorkedHours implements WorkedHoursInterface {
         this._created_at = props.created_at || new Date();
         this._type_id = props.type_id;
         this._date =props.date || new Date().toDateString();
-        this._hours_worked= props.hours_worked || "00:00:00";
+        this._hours_worked= props.hours_worked || "00h 00m";
         this._type= props.type || null
         this._employee = props.employee || null
         this.validateWorkedHours();
@@ -67,10 +67,10 @@ export class WorkedHours implements WorkedHoursInterface {
         if (stringNotNullAndBlankSpace.test(this._employee_id) === false) {
             throw new AppError("Employee id is not a valid", 500);
         }
-        if(isHours.test(this._hours_worked)===false){
-            throw new AppError('hours_worked incorrect', 500);
+    //     if(isHours.test(this._hours_worked)===false){
+    //         throw new AppError('hours_worked incorrect', 500);
 
-       }
+    //    }
       
     }
 

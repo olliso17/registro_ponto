@@ -6,10 +6,10 @@ import { AppError } from "../../../error/app.error";
 export class GetAllWorkedHoursByCreatedUsecase{
     constructor(private workedHourssRepository: WorkedHoursRepositoryInterface){}
     async execute(employee_id:string):Promise<WorkedHours[]>{
-        const today = new Date().toDateString();
-        if (!today.trim() || !employee_id) {
+    
+        if ( !employee_id.trim()) {
             throw new  AppError('Todos os campos devem ser preenchidos.', 500);
         }
-        return this.workedHourssRepository.getAllWorkedHoursByCreated(today,employee_id);
+        return this.workedHourssRepository.getAllWorkedHoursByCreated(employee_id);
     }
 }
