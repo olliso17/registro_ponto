@@ -4,6 +4,7 @@ import EmployeeRepositoryInterface from './employee.repository.interface';
 import { AppError } from '../../../error/app.error';
 import { Employee } from '../../../domain/entities/employee/employee';
 import * as CRC32 from 'crc-32';
+import { workerData } from 'worker_threads';
 
 const prisma = new PrismaClient();
 
@@ -56,7 +57,14 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
 
             if (!employeeData) return null;
 
-            const employee = new Employee(employeeData);
+            const employee = new Employee({
+                name: employeeData.name,
+                hash: employeeData.hash,
+                id: employeeData.id,
+                created_at:employeeData.created_at,
+                active:employeeData.active,
+                updated_at: employeeData.updated_at,
+            });
 
             return employee;
         } catch (error) {

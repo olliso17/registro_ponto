@@ -1,3 +1,4 @@
+import { WorkedHours } from "@prisma/client";
 
 export default interface EmployeeInterface{
     get id(): string;

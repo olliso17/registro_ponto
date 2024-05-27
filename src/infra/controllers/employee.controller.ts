@@ -4,14 +4,17 @@ import EmployeeRepositoryInterface from '../repositories/employee/employee.repos
 import EmployeeRepository from '../repositories/employee/employee.repository';
 import { CreateEmployeeUsecase } from '../../application/usecases/employee/createEmployee.usecase';
 import { GetEmployeeByHashUsecase } from '../../application/usecases/employee/getEmployeeByHash.usecase';
+import { GetEmployeeByIdUsecase } from '../../application/usecases/employee/getEmployeeById.usecase';
 
 class EmployeeController {
     private createEmployeeUsecase: CreateEmployeeUsecase;
     private getEmployeeByHashUsecase:GetEmployeeByHashUsecase
+    private getEmployeeByIdUsecase: GetEmployeeByIdUsecase
     constructor() {
         const employeeRepository = new EmployeeRepository();
         this.createEmployeeUsecase = new CreateEmployeeUsecase(employeeRepository);
         this.getEmployeeByHashUsecase = new GetEmployeeByHashUsecase(employeeRepository)
+        this.getEmployeeByIdUsecase = new GetEmployeeByIdUsecase(employeeRepository)
     }
 
     async createEmployee(req: Request, res: Response): Promise<Response> {
@@ -38,19 +41,19 @@ class EmployeeController {
             return res.status(500).json({ error: 'Failed to fetch employee' });
         }
     }
-    // async getEmployeeById(req: Request, res: Response): Promise<Response> {
-    //     const { id } = req.params;
+    async getEmployeeById(req: Request, res: Response): Promise<Response> {
+        const { id } = req.params;
 
-    //     try {
-    //         const employee = await this.employeeRepository.getEmployeeById(id);
-    //         if (!employee) {
-    //             return res.status(404).json({ error: 'Employee not found' });
-    //         }
-    //         return res.status(200).json(employee);
-    //     } catch (error) {
-    //         return res.status(500).json({ error: 'Failed to fetch employee' });
-    //     }
-    // }
+        try {
+            const employee = await this.getEmployeeByIdUsecase.execute(id);
+            if (!employee) {
+                return res.status(404).json({ error: 'Employee not found' });
+            }
+            return res.status(200).json(employee);
+        } catch (error) {
+            return res.status(500).json({ error: 'Failed to fetch employee' });
+        }
+    }
 
     // async getAllEmployees(req: Request, res: Response): Promise<Response> {
     //     try {
