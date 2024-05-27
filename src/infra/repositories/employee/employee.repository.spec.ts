@@ -1,7 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { AppError } from '../../../error/app.error';
 import EmployeeRepository from './employee.repository';
-import prisma from '../../../../prisma/prisma';
 
 describe('Employee Repository', () => {
 
