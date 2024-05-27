@@ -1,6 +1,6 @@
 import request from "supertest";
-import { app, port } from "../../../app";
-import router from "../../../infra/routers/router";
+import { app, port } from "./app";
+import router from "./infra/routers/router";
 import * as CRC32 from 'crc-32';
 import {describe, test} from "vitest"
 
