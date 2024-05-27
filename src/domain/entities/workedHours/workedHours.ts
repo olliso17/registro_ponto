@@ -1,23 +1,23 @@
 import { Type } from "@prisma/client";
-import { AppError } from "../../../error/app.error";
-import { isHours, stringNotNullAndBlankSpace } from "../../../util/regex";
-import WorkedHoursInterface from "./workedHours.interface";
-import { Employee } from "../employee/employee";
 import { v4 as uuidv4 } from 'uuid';
+import { AppError } from "../../../error/app.error";
+import { stringNotNullAndBlankSpace } from "../../../util/regex";
+import { Employee } from "../employee/employee";
+import WorkedHoursInterface from "./workedHours.interface";
 
 type WorkedHoursProps = {
     employee_id: string,
     type_id: string,
-    hours_worked?: string 
-    date?:string
-    type?:Type|any
-    employee?: Employee|any
-    id?:string
+    hours_worked?: string
+    date?: string
+    type?: Type | any
+    employee?: Employee | any
+    id?: string
     created_at?: Date;
 }
 
 export class WorkedHours implements WorkedHoursInterface {
-    private _id:string;
+    private _id: string;
     private _hours_worked: string;
     private _employee_id: string;
     private _created_at: Date;
@@ -31,9 +31,9 @@ export class WorkedHours implements WorkedHoursInterface {
         this._employee_id = props.employee_id;
         this._created_at = props.created_at || new Date();
         this._type_id = props.type_id;
-        this._date =props.date || new Date().toDateString();
-        this._hours_worked= props.hours_worked || "00h 00m";
-        this._type= props.type || null
+        this._date = props.date || new Date().toDateString();
+        this._hours_worked = props.hours_worked || "00h 00m";
+        this._type = props.type || null
         this._employee = props.employee || null
         this.validateWorkedHours();
     }
@@ -55,23 +55,23 @@ export class WorkedHours implements WorkedHoursInterface {
     get type_id(): string {
         return this._type_id;
     }
-  
+
     get employee_id(): string {
         return this._employee_id;
     }
     get created_at(): Date {
         return this._created_at;
     }
-   
+
     validateWorkedHours(): void {
         if (stringNotNullAndBlankSpace.test(this._employee_id) === false) {
             throw new AppError("Employee id is not a valid", 500);
         }
-    //     if(isHours.test(this._hours_worked)===false){
-    //         throw new AppError('hours_worked incorrect', 500);
+        //     if(isHours.test(this._hours_worked)===false){
+        //         throw new AppError('hours_worked incorrect', 500);
 
-    //    }
-      
+        //    }
+
     }
 
 }

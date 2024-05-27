@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import { CreateWorkedHoursUsecase } from "../../application/usecases/workedHours/createWorkedHours.usecase";
+import { GetAllWorkedHoursByCreatedUsecase } from '../../application/usecases/workedHours/getAllWorkedHoursByCreated';
 import { GetAllWorkedByEmployeeIdUsecase } from "../../application/usecases/workedHours/getAllWorkedHoursByEmployeeId.usecase";
 import WorkedHoursRepository from "../repositories/workedHours/workedHours.repository";
-import { WorkedHours } from '@prisma/client';
-import { GetAllWorkedHoursByCreatedUsecase } from '../../application/usecases/workedHours/getAllWorkedHoursByCreated';
 
 
 class WorkedHoursController {
@@ -19,10 +18,10 @@ class WorkedHoursController {
     }
 
     async createWorkedHours(req: Request, res: Response): Promise<Response> {
-        const { employee_id, hours_worked, type_id} = req.body;
-      
+        const { employee_id, hours_worked, type_id } = req.body;
+
         try {
-             const workedHours = await this.createWorkedHoursUsecase.execute(employee_id,hours_worked, type_id);
+            const workedHours = await this.createWorkedHoursUsecase.execute(employee_id, hours_worked, type_id);
             return res.status(201).json(workedHours);
         } catch (error) {
             return res.status(500).json({ error: 'Failed to create WorkedHours' });
@@ -30,8 +29,8 @@ class WorkedHoursController {
 
         }
     }
-     async getWorkedHoursByEmployeeId(req: Request, res: Response): Promise<Response> {
-        const {employee_id} = req.params;
+    async getWorkedHoursByEmployeeId(req: Request, res: Response): Promise<Response> {
+        const { employee_id } = req.params;
 
         try {
             const workedHours = await this.getAllWorkedByEmployeeIdUsecase.execute(employee_id);
@@ -44,7 +43,7 @@ class WorkedHoursController {
         }
     }
     async getWorkedHoursByCreated(req: Request, res: Response): Promise<Response> {
-        const {employee_id} = req.params;
+        const { employee_id } = req.params;
         try {
             const workedHours = await this.getAllWorkedHoursByCreatedUsecase.execute(employee_id);
             if (!workedHours) {

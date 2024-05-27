@@ -1,16 +1,16 @@
 
 import { PrismaClient } from '@prisma/client';
-import EmployeeRepositoryInterface from './employee.repository.interface';
-import { AppError } from '../../../error/app.error';
-import { Employee } from '../../../domain/entities/employee/employee';
 import * as CRC32 from 'crc-32';
-import { workerData } from 'worker_threads';
+import { Employee } from '../../../domain/entities/employee/employee';
+import { AppError } from '../../../error/app.error';
+import EmployeeRepositoryInterface from './employee.repository.interface';
 
 const prisma = new PrismaClient();
 
 
 class EmployeeRepository implements EmployeeRepositoryInterface {
-    async createEmployee( name: string): Promise<Employee> {
+    async createEmployee(name: string): Promise<Employee> {
+     
         const codigo = CRC32.str(name);
         const hash = (codigo >>> 0).toString(16).padStart(8, '0');
         try {
@@ -19,20 +19,20 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
                     name, hash
                 }
             });
-        
+
             const employee = new Employee({
                 name: employeeData.name,
                 hash: employeeData.hash,
                 id: employeeData.id,
-                created_at:employeeData.created_at,
-                active:employeeData.active,
+                created_at: employeeData.created_at,
+                active: employeeData.active,
                 updated_at: employeeData.updated_at
             });
-            
-             
+
+
             return employee;
         } catch (error) {
-            throw new AppError('Failed to create employee', 500);
+            throw new AppError("Name is not a valid employee", 500);
         } finally {
             await prisma.$disconnect();
         }
@@ -61,8 +61,8 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
                 name: employeeData.name,
                 hash: employeeData.hash,
                 id: employeeData.id,
-                created_at:employeeData.created_at,
-                active:employeeData.active,
+                created_at: employeeData.created_at,
+                active: employeeData.active,
                 updated_at: employeeData.updated_at,
             });
 

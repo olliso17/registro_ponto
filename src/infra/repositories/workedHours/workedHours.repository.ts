@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+import { WorkedHours } from "../../../domain/entities/workedHours/workedHours";
 import { AppError } from "../../../error/app.error";
 import { WorkedHoursRepositoryInterface } from "./workedHours.repository.interface";
-import { WorkedHours } from "../../../domain/entities/workedHours/workedHours";
 
 const prisma = new PrismaClient();
 
@@ -11,6 +11,7 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
     async createWorkedHours(employee_id: string, hours_worked: string, type_id: string): Promise<WorkedHours> {
         const date = new Date().toDateString();
         try {
+            const date = new Date().toDateString()
             const workedHoursData = await prisma.workedHours.create({
                 data: {
                     employee_id, hours_worked, type_id, date
