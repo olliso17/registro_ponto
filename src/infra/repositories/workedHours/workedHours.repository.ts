@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+import { WorkedHours } from "../../../domain/entities/workedHours/workedHours";
 import { AppError } from "../../../error/app.error";
 import { WorkedHoursRepositoryInterface } from "./workedHours.repository.interface";
-import { WorkedHours } from "../../../domain/entities/workedHours/workedHours";
 
 const prisma = new PrismaClient();
 
@@ -10,15 +10,16 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
 
     async createWorkedHours(employee_id: string, hours_worked: string, type_id: string): Promise<WorkedHours> {
         try {
+            const date = new Date().toDateString()
             const workedHoursData = await prisma.workedHours.create({
                 data: {
-                    employee_id, hours_worked, type_id
+                    employee_id, hours_worked, type_id, date
                 }
             })
             const workedHours = new WorkedHours({
                 id: workedHoursData.id,
                 date: workedHoursData.date,
-                created_at:workedHoursData.created_at,
+                created_at: workedHoursData.created_at,
                 employee_id: workedHoursData.employee_id,
                 hours_worked: workedHoursData.hours_worked,
                 type_id: workedHoursData.type_id
@@ -41,11 +42,11 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
                     where: {
                         employee_id: employee_id,
                     },
-                    include:{
-                        employee:true,
-                        type:{
-                            select:{
-                                name:true
+                    include: {
+                        employee: true,
+                        type: {
+                            select: {
+                                name: true
                             }
                         }
                     }
@@ -54,7 +55,7 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
             const workedHours: WorkedHours[] = [];
             workedHoursData.map(worked => {
                 const hours = new WorkedHours(worked);
-                
+
                 workedHours.push(hours)
             });
 
@@ -66,17 +67,22 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
         }
 
     }
-    async getAllWorkedHoursByCreated(today: string, employee_id: string): Promise<WorkedHours[]> {
+    async getAllWorkedHoursByCreated(employee_id: string): Promise<WorkedHours[]> {
 
         try {
-       
+            const today = new Date().toDateString();
             const workedHoursData = await prisma.workedHours.findMany(
-                {                   
+                {
                     where: {
                         employee_id: employee_id,
                     },
-                    include:{
-                        employee:true
+                    include: {
+                        employee: true,
+                        type: {
+                            select: {
+                                name: true
+                            }
+                        }
                     }
 
                 }
