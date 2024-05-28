@@ -14,6 +14,7 @@ router.post('/workedHours/create', (req, res) => workedHoursController.createWor
 router.get('/workedHours/:employee_id', (req, res) => workedHoursController.getWorkedHoursByEmployeeId(req, res));
 router.get('/employee/:id', (req, res) => employeeController.getEmployeeById(req, res));
 router.get('/type/', (req, res) => typeController.getAllType(req, res));
+router.post('/type/create', (req, res) => typeController.createType(req, res));
 router.get('/workedHours/created/:employee_id', (req, res) => workedHoursController.getWorkedHoursByCreated(req, res));
 router.get('/workedHours/entry/:employee_id', (req, res) => workedHoursController.getWorkedHoursByEntryType(req, res));
 router.get('/workedHours/exit/:employee_id', (req, res) => workedHoursController.getWorkedHoursByExitType(req, res));
