@@ -1,6 +1,4 @@
-
 import { Request, Response } from 'express';
-import EmployeeRepositoryInterface from '../repositories/employee/employee.repository.interface';
 import EmployeeRepository from '../repositories/employee/employee.repository';
 import { CreateEmployeeUsecase } from '../../application/usecases/employee/createEmployee.usecase';
 import { GetEmployeeByHashUsecase } from '../../application/usecases/employee/getEmployeeByHash.usecase';

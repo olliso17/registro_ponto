@@ -1,4 +1,4 @@
-import { test, expect, describe, assert} from 'vitest';
+import { test, expect, describe} from 'vitest';
 import { Employee } from './employee';
 
 describe('Employee Entity', ()=>{

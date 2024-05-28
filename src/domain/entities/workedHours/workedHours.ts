@@ -10,8 +10,8 @@ type WorkedHoursProps = {
     type_id: string,
     hours_worked?: string
     date?: string
-    type?: Type | any
-    employee?: Employee | any
+    type?: Type | undefined
+    employee?: Employee | undefined
     id?: string
     created_at?: Date;
 }
@@ -23,8 +23,8 @@ export class WorkedHours implements WorkedHoursInterface {
     private _created_at: Date;
     private _date: string;
     private _type_id: string;
-    private _type: Type;
-    private _employee: Employee;
+    private _type: Type| undefined;
+    private _employee: Employee| undefined;
 
     constructor(props: WorkedHoursProps) {
         this._id = props.id || uuidv4();
@@ -33,17 +33,17 @@ export class WorkedHours implements WorkedHoursInterface {
         this._type_id = props.type_id;
         this._date = props.date || new Date().toDateString();
         this._hours_worked = props.hours_worked || "00h 00m";
-        this._type = props.type || null
-        this._employee = props.employee || null
+        this._type = props.type || undefined
+        this._employee = props.employee || undefined
         this.validateWorkedHours();
     }
     get id(): string {
         return this._id;
     }
-    get type(): { id: string; name: string; } {
+    get type(): Type|undefined {
         return this._type
     }
-    get employee(): Employee {
+    get employee(): Employee |undefined {
         return this._employee
     }
     get date(): string {

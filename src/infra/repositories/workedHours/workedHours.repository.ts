@@ -9,7 +9,7 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
 
 
     async createWorkedHours(employee_id: string, hours_worked: string, type_id: string): Promise<WorkedHours> {
-        const date = new Date().toDateString();
+        
         try {
             const date = new Date().toDateString()
             const workedHoursData = await prisma.workedHours.create({
