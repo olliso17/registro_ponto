@@ -8,7 +8,7 @@ export default interface WorkedHoursInterface{
     get date():string;
     get type_id():string;
     get hours_worked(): string;
-    get type(): Type|undefined 
-    get employee():Employee|undefined 
+    get type(): Type |null
+    get employee():Employee |null
     validateWorkedHours():void;
 }

@@ -1,15 +1,5 @@
 version: "3.1"
 services:
-  src:
-    build:
-      context: ./src
-      dockerfile: Dockerfile
-    command: npm i
-    ports:
-      - 8080:8000
-    depends_on:
-      - postgres
-      - cache
   postgres:
     image: "postgres"
     environment:
@@ -33,14 +23,6 @@ services:
       - "54322:80"
     depends_on:
       - postgres
-  cache:
-    image: redis:6.2-alpine
-    restart: always
-    ports:
-      - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning --requirepass 12345
-    volumes: 
-      - cache:/data
 volumes:
   cache:
     driver: local

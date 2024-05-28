@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { PrismaClient } from "@prisma/client";
 import { WorkedHours } from "../../../domain/entities/workedHours/workedHours";
 import { AppError } from "../../../error/app.error";
@@ -9,7 +10,7 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
 
 
     async createWorkedHours(employee_id: string, hours_worked: string, type_id: string): Promise<WorkedHours> {
-        
+
         try {
             const date = new Date().toDateString()
             const workedHoursData = await prisma.workedHours.create({
@@ -53,10 +54,12 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
                     }
                 }
             )
+
             const workedHours: WorkedHours[] = [];
             workedHoursData.map(worked => {
+                /* eslint-disable */
                 const hours = new WorkedHours(worked);
-
+                /* eslint-enable */
                 workedHours.push(hours)
             });
 
@@ -90,7 +93,9 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
             const workedHours: WorkedHours[] = [];
             workedHoursData.map(worked => {
                 if (worked.date === today) {
+                     /* eslint-disable */
                     const hours = new WorkedHours(worked);
+                    /* eslint-enable */
                     workedHours.push(hours)
                 }
 
@@ -123,7 +128,7 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
             )
             const workedHours: WorkedHours[] = [];
             workedHoursData.map(worked => {
-                if(worked.type.name === "entrada"){
+                if (worked.type.name === "entrada") {
                     const hours = new WorkedHours(worked);
 
                     workedHours.push(hours)
@@ -158,7 +163,7 @@ class WorkedHoursRepository implements WorkedHoursRepositoryInterface {
             )
             const workedHours: WorkedHours[] = [];
             workedHoursData.map(worked => {
-                if(worked.type.name === "saida"){
+                if (worked.type.name === "saida") {
                     const hours = new WorkedHours(worked);
 
                     workedHours.push(hours)
