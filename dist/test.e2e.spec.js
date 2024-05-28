@@ -17365,9 +17365,9 @@ var require_Immutable = __commonJS({
   }
 });
 
-// node_modules/react-is/cjs/react-is.production.min.js
+// node_modules/pretty-format/node_modules/react-is/cjs/react-is.production.min.js
 var require_react_is_production_min = __commonJS({
-  "node_modules/react-is/cjs/react-is.production.min.js"(exports2) {
+  "node_modules/pretty-format/node_modules/react-is/cjs/react-is.production.min.js"(exports2) {
     "use strict";
     var b2 = Symbol.for("react.element");
     var c2 = Symbol.for("react.portal");
@@ -17476,9 +17476,9 @@ var require_react_is_production_min = __commonJS({
   }
 });
 
-// node_modules/react-is/cjs/react-is.development.js
+// node_modules/pretty-format/node_modules/react-is/cjs/react-is.development.js
 var require_react_is_development = __commonJS({
-  "node_modules/react-is/cjs/react-is.development.js"(exports2) {
+  "node_modules/pretty-format/node_modules/react-is/cjs/react-is.development.js"(exports2) {
     "use strict";
     if (process.env.NODE_ENV !== "production") {
       (function() {
@@ -17658,9 +17658,9 @@ var require_react_is_development = __commonJS({
   }
 });
 
-// node_modules/react-is/index.js
+// node_modules/pretty-format/node_modules/react-is/index.js
 var require_react_is = __commonJS({
-  "node_modules/react-is/index.js"(exports2, module2) {
+  "node_modules/pretty-format/node_modules/react-is/index.js"(exports2, module2) {
     "use strict";
     if (process.env.NODE_ENV === "production") {
       module2.exports = require_react_is_production_min();
